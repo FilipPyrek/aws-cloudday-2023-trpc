@@ -12,6 +12,8 @@ const config: SSTConfig = {
 		}
 	},
 	stacks(app) {
+		app.setDefaultRemovalPolicy('destroy')
+
 		app.stack(API).stack(Frontend)
 	}
 }

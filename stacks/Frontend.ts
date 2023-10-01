@@ -1,7 +1,11 @@
 import { NextjsSite, StackContext } from 'sst/constructs'
 
 export function Frontend({ stack }: StackContext): void {
-	new NextjsSite(stack, 'Frontend', {
+	const frontend = new NextjsSite(stack, 'Frontend', {
 		path: 'packages/frontend'
+	})
+
+	stack.addOutputs({
+		frontendUrl: frontend.url
 	})
 }

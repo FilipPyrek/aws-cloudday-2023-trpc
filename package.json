@@ -1,0 +1,35 @@
+{
+  "name": "trpc-demo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm run env -- sst dev",
+    "build": "pnpm run env -- sst build",
+    "deploy": "pnpm run env -- sst deploy",
+    "remove": "pnpm run env -- sst remove",
+    "console": "pnpm run env -- sst console",
+    "typecheck": "tsc --noEmit",
+		"env": "env-cmd -f ./.env bash -c \"ssocreds -p \\$AWS_PROFILE\" && env-cmd -f ./.env"
+  },
+  "devDependencies": {
+    "sst": "^2.26.9",
+    "aws-cdk-lib": "2.95.1",
+    "constructs": "10.2.69",
+    "typescript": "^5.2.2",
+    "@tsconfig/node18": "^18.2.2",
+		"eslint": "^8.36.0",
+		"eslint-config-prettier": "^8.7.0",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-simple-import-sort": "^10.0.0",
+		"@typescript-eslint/eslint-plugin": "^5.55.0",
+		"@typescript-eslint/parser": "^5.55.0",
+		"prettier": "^2.8.5",
+		"aws-sso-creds-helper": "^1.10.11",
+		"env-cmd": "^10.1.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@trpc-demo/core",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "sst bind vitest",
+    "typecheck": "tsc -noEmit"
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6",
+    "@types/node": "^20.8.0",
+    "sst": "^2.26.9"
+  },
+  "dependencies": {
+    "zod": "^3.22.2"
+  }
+}

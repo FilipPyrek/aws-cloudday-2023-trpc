@@ -1,15 +1,20 @@
 {
-  "name": "@trpc-demo/functions",
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "test": "sst bind vitest",
-    "typecheck": "tsc -noEmit"
-  },
-  "devDependencies": {
-    "@types/node": "^20.8.0",
-    "@types/aws-lambda": "^8.10.122",
-    "vitest": "^0.34.6",
-    "sst": "^2.26.9"
-  }
+	"name": "@trpc-demo/functions",
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"test": "sst bind vitest",
+		"typecheck": "tsc -noEmit"
+	},
+	"dependencies": {
+		"@trpc/server": "^10.38.5",
+		"@aws-sdk/client-dynamodb": "^3.427.0",
+		"nanoid": "^5.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "^20.8.0",
+		"@types/aws-lambda": "^8.10.122",
+		"vitest": "^0.34.6",
+		"sst": "^2.26.9"
+	}
 }

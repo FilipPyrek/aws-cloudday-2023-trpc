@@ -2,6 +2,7 @@ import { SSTConfig } from 'sst'
 
 import { API } from './stacks/Api'
 import { Frontend } from './stacks/Frontend'
+import { Resources } from './stacks/Resources'
 
 const config: SSTConfig = {
 	config() {
@@ -14,7 +15,7 @@ const config: SSTConfig = {
 	stacks(app) {
 		app.setDefaultRemovalPolicy('destroy')
 
-		app.stack(API).stack(Frontend)
+		app.stack(Resources).stack(API).stack(Frontend)
 	}
 }
 

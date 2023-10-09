@@ -1,30 +1,32 @@
-import { Api, EventBus, StackContext } from 'sst/constructs'
+import { Api, Function, StackContext, use } from 'sst/constructs'
 
-export function API({ stack }: StackContext): void {
-	const bus = new EventBus(stack, 'bus', {
-		defaults: {
-			retries: 10
-		}
+import { Resources } from './Resources'
+
+export interface ApiOutputs {
+	api: Api
+}
+
+export function API({ stack }: StackContext): ApiOutputs {
+	const resources = use(Resources)
+
+	const handlerFunction = new Function(stack, 'TrpcHandler', {
+		handler: 'packages/functions/src/trpc/handler.handler',
+		bind: [resources.postsTable]
 	})
 
-	const api = new Api(stack, 'api', {
-		defaults: {
-			function: {
-				bind: [bus]
-			}
-		},
+	const api = new Api(stack, 'Api', {
 		routes: {
-			'GET /': 'packages/functions/src/lambda.handler',
-			'GET /todo': 'packages/functions/src/todo.list',
-			'POST /todo': 'packages/functions/src/todo.create'
-		}
-	})
-
-	bus.subscribe('todo.created', {
-		handler: 'packages/functions/src/events/todo-created.handler'
+			'GET /trpc/{proxy+}': handlerFunction,
+			'POST /trpc/{proxy+}': handlerFunction
+		},
+		cors: true
 	})
 
 	stack.addOutputs({
 		ApiEndpoint: api.url
 	})
+
+	return {
+		api
+	}
 }

@@ -22,7 +22,7 @@ export type Meta = {
 
 export const t = initTRPC.context<Context>().meta<Meta>().create()
 
-const isAdmin = t.middleware(async (opts) => {
+const adminCheck = t.middleware(async (opts) => {
 	const { ctx, meta, rawInput } = opts
 	if (
 		meta?.adminOnly === true &&
@@ -57,7 +57,7 @@ export const appRouter = t.router({
 		return db.listPosts()
 	}),
 	createPost: t.procedure
-		.use(isAdmin)
+		.use(adminCheck)
 		.meta({ adminOnly: true })
 		.input(
 			z.object({
@@ -73,7 +73,7 @@ export const appRouter = t.router({
 			db.createPost(opts.input)
 		}),
 	removePost: t.procedure
-		.use(isAdmin)
+		.use(adminCheck)
 		.meta({ adminOnly: true })
 		.input(
 			z.object({
